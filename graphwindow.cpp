@@ -1,6 +1,7 @@
 #include "graphwindow.h"
 #include "ui_graphwindow.h"
 #include <iostream>
+#include <vector>
 
 // Initialising the static variable
 int GraphWindow::FigureCounter=0;
@@ -84,6 +85,86 @@ GraphWindow::GraphWindow(DataSet *DataSet,QWidget *parent) :
 
 }
 
+GraphWindow::GraphWindow(std::vector<DataSet *>DataSet,QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::GraphWindow)
+{
+    ui->setupUi(this);
+
+    // Install an event filter on CustomWidget
+    ui->customPlot->installEventFilter(this);
+
+    // Increment the figure counter:
+    FigureCounter += DataSet.size();
+
+    // Create the XY graph (setting te paramters of the dataset graph):
+    SetGraphVectorSetting(DataSet);
+
+    // Setting the paramters of the figure:
+    SetFigureSetting();
+
+    // Setting the title of the figure
+    this->setWindowTitle("Figure "+QString::number(FigureCounter));
+
+    // Constructing the context menu so it is ready to be called whenever
+    ConstructContextMenu(ContextMenu);
+
+    // connecting actions to responses via signal-slot mechanism:
+    {
+        //color change actions
+        connect(changeColorRed, &QAction::triggered, this, [this]() {
+            changeGraphColor(0, Qt::red);
+        });
+        connect(changeColorGreen, &QAction::triggered, this, [this]() {
+            changeGraphColor(0, Qt::green);
+        });
+        connect(changeColorBlack, &QAction::triggered, this, [this]() {
+            changeGraphColor(0, Qt::black);
+        });
+        connect(changeColorYellow, &QAction::triggered, this, [this]() {
+            changeGraphColor(0, Qt::yellow);
+        });
+    }
+
+    {
+        //width change actions
+        connect(changeWidth10, &QAction::triggered, this, [this]() {
+            changeGraphLineWidth(0, 1);
+        });
+        connect(changeWidth3, &QAction::triggered, this, [this]() {
+            changeGraphLineWidth(0, 3);
+        });
+        connect(changeWidth5, &QAction::triggered, this, [this]() {
+            changeGraphLineWidth(0, 5);
+        });
+        connect(changeWidth10, &QAction::triggered, this, [this]() {
+            changeGraphLineWidth(0, 10);
+        });
+
+    }
+
+    {
+        //line style change actions
+        connect(lineStyleNone, &QAction::triggered, this, [this]() {
+            changeGraphStyle(0, QCPGraph::lsNone);
+        });
+        connect(lineStyleLine, &QAction::triggered, this, [this]() {
+            changeGraphStyle(0, QCPGraph::lsLine);
+        });
+        connect(lineStyleStepLeft, &QAction::triggered, this, [this]() {
+            changeGraphStyle(0, QCPGraph::lsStepLeft);
+        });
+        connect(lineStyleStepCenter, &QAction::triggered, this, [this]() {
+            changeGraphStyle(0, QCPGraph::lsStepCenter);
+        });
+        connect(lineStyleImpulse, &QAction::triggered, this, [this]() {
+            changeGraphStyle(0, QCPGraph::lsImpulse);
+        });
+    }
+
+}
+
+
 GraphWindow::~GraphWindow()
 { // Called when the window of the figure is closed
     delete ui;
@@ -97,10 +178,10 @@ void GraphWindow::SetGraphSetting(DataSet *DataSet)
 { // Sets up the curve and plots it
 
     ui->customPlot->addGraph();
-    ui->customPlot->graph(0)->addData(DataSet);
-	ui->customPlot->graph(0)->setPen(QPen(Qt::blue));
-    ui->customPlot->graph(0)->setName(DataSet->getName());
-    ui->customPlot->graph(0)->rescaleAxes();
+    ui->customPlot->graph()->addData(DataSet);
+    ui->customPlot->graph()->setPen(QPen(Qt::blue));
+    ui->customPlot->graph()->setName(DataSet->getName());
+    ui->customPlot->graph()->rescaleAxes();
 }
 
 void GraphWindow::contextMenuEvent(QContextMenuEvent *event)
@@ -138,6 +219,16 @@ void GraphWindow::ConstructContextMenu(QMenu *)
 }
 
 
+void GraphWindow::SetGraphVectorSetting(std::vector<DataSet *>DataSet)
+{ // Sets up the curve and plots it
+    for (auto data : DataSet) {
+        ui->customPlot->addGraph();
+        ui->customPlot->graph()->addData(data);
+        ui->customPlot->graph()->setPen(QPen(Qt::blue));
+        ui->customPlot->graph()->setName(data->getName());
+        ui->customPlot->graph()->rescaleAxes();
+    }
+}
 
 void GraphWindow::SetFigureSetting()
 { // Sets up the properties of the figure (that contains the curve)
