@@ -1,0 +1,25 @@
+# Ignore build artifacts
+build/
+*.o
+*.pro.user
+*.pro.user.*
+
+# Ignore generated files
+Makefile
+*.moc
+*.log
+*.qm
+
+# Ignore compiled files
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Ignore user-specific files
+*.user
+*.user.*
+
+#ignore additional folders
+GSLinclude/
+GSLlib/
