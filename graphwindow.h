@@ -33,8 +33,10 @@ class GraphWindow : public QDialog
 
 public:
     explicit GraphWindow(DataSet *DataSet,QWidget *parent = nullptr);
+    explicit GraphWindow(std::vector<DataSet *>DataSet,QWidget *parent = nullptr);
     ~GraphWindow();
     void SetGraphSetting(DataSet *DataSet); // Function to control the setting of the curve (dataset represenation in the figure)
+    void SetGraphVectorSetting(std::vector<DataSet *>DataSet);
     void SetFigureSetting(); // Function to control the setting of the figure itself
 	void contextMenuEvent(QContextMenuEvent *event);
 	void ConstructContextMenu(QMenu *);
