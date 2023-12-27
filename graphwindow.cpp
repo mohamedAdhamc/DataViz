@@ -164,7 +164,6 @@ GraphWindow::GraphWindow(std::vector<DataSet *>DataSet,QWidget *parent) :
 
 }
 
-
 GraphWindow::~GraphWindow()
 { // Called when the window of the figure is closed
     delete ui;
@@ -182,10 +181,6 @@ void GraphWindow::SetGraphSetting(DataSet *DataSet)
     ui->customPlot->graph()->setPen(QPen(Qt::blue));
     ui->customPlot->graph()->setName(DataSet->getName());
     ui->customPlot->graph()->rescaleAxes();
-<<<<<<< HEAD
-=======
-
->>>>>>> 7ff9220 (remove index from graph())
 }
 
 void GraphWindow::contextMenuEvent(QContextMenuEvent *event)

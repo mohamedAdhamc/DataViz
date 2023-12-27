@@ -23,8 +23,6 @@
 #include <vector>
 #include <qcustomplot.h>
 
-
-
 namespace Ui {
 class GraphWindow;
 }
