@@ -57,7 +57,15 @@ void HistogramWindow::SetHistogramSetting(DataSet *DataSet)
     for (int i=0; i< kHistogramBinNumber; i++) {
         barChart->addData(i, gsl_histogram_get(h,i));
     }
+    double lower = 0, upper = 0;
+    gsl_histogram_get_range(h, 0, &lower, &upper);
+    qDebug() << lower << upper;
 
+    QMap<double, QString> m = {{0, "a"}, {1, "b"}, {2, "c"}, {3, "d"}, {4, "e"}, {5, "f"}, {6, "g"}, {7, "h"}, {8, "i"}, {9, "j"}};
+    QCPAxisTickerText *t = new QCPAxisTickerText();
+    t->setTicks(m);
+    QSharedPointer<QCPAxisTicker> ticker(t);
+    ui->customPlot->xAxis->setTicker(ticker);
     barChart->setPen(QPen(Qt::blue));  // Set bar outline color
     barChart->setBrush(QBrush(Qt::blue));  // Set bar fill color
 
