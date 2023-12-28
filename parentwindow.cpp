@@ -50,7 +50,7 @@ void ParentWindow::on_actionLoad_Dataset_triggered()
     // To enable the ParentWindow to plot the dataset when the user clicks on XYPlot option in the context menu
     // of an already displayed DataSetWidnow
     connect(AddedDataSetWindow,SIGNAL(Plot_XYPlot_SIGNAL(DataSet*)),this,SLOT(GraphWindowToBePlotted(DataSet*)));
-
+    connect(AddedDataSetWindow,SIGNAL(Plot_Histogram_SIGNAL(DataSet*)),this,SLOT(HistogramWindowToBePlotted(DataSet*)));
     }
 
 }
@@ -60,6 +60,13 @@ void ParentWindow::GraphWindowToBePlotted(DataSet *ptr)
     GraphWindow *AddedGraphWindow=new GraphWindow(ptr,this);
     subWindow=ui->WindowsManager->addSubWindow(AddedGraphWindow);
     AddedGraphWindow->show();
+}
+
+void ParentWindow::HistogramWindowToBePlotted(DataSet *ptr)
+{ // This function is a slot that is called when the parentwindow is to plot a dataset in from a datasetwindow
+    HistogramWindow *AddedHistogramWindow=new HistogramWindow(ptr,this);
+    subWindow=ui->WindowsManager->addSubWindow(AddedHistogramWindow);
+    AddedHistogramWindow->show();
 }
 
 

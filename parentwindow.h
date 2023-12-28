@@ -25,6 +25,7 @@
 #include "dataset.h"
 #include "datasetwindow.h"
 #include "graphwindow.h"
+#include "histogramwindow.h"
 #include "aboutdialog.h"
 #include "helpdialog.h"
 
@@ -45,6 +46,7 @@ public:
 private slots:
     void on_actionLoad_Dataset_triggered();
     void GraphWindowToBePlotted(DataSet *ptr); // A slot to plot a new graph window
+    void HistogramWindowToBePlotted(DataSet *ptr); // A slot to plot a new graph window
 
     void on_actionAbout_triggered();
 
