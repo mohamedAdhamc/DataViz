@@ -14,6 +14,7 @@ SOURCES += \
     datasetwindow.cpp \
     graphwindow.cpp \
     helpdialog.cpp \
+    histogramwindow.cpp \
     main.cpp \
     parentwindow.cpp \
     qcustomplot.cpp
@@ -25,6 +26,7 @@ HEADERS += \
     datasetwindow.h \
     graphwindow.h \
     helpdialog.h \
+    histogramwindow.h \
     parentwindow.h \
     qcustomplot.h
 
@@ -33,6 +35,7 @@ FORMS += \
     datasetwindow.ui \
     graphwindow.ui \
     helpdialog.ui \
+    histogramwindow.ui \
     parentwindow.ui
 
 # Default rules for deployment.

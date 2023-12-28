@@ -37,10 +37,12 @@ public:
 
 public slots:
     void DataSetToBePlotted(); // Local slot to forward a single to the parent window
+    void DataSetHistogram();
 
 
 signals:
     void Plot_XYPlot_SIGNAL(DataSet *ptr); // A signal to tell the parent window that the user wants this DataSet to be plot
+    void Plot_Histogram_SIGNAL(DataSet *ptr); // A signal to tell the parent window that the user wants this DataSet to be plotted in a histogram
 
 private:
     Ui::DataSetWindow *ui;
@@ -49,6 +51,7 @@ private:
 
     // List of actions in the app (defined in the code rather than the UI)
     QAction* XYPlot=new QAction("XY Plot", this);
+    QAction* Histogram=new QAction("Histogram", this);
 
 
     //Creating the menus (all accessable from the context menu):

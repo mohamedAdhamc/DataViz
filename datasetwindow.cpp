@@ -52,11 +52,13 @@ DataSetWindow::DataSetWindow(DataSet* DataSet,QWidget *parent) :
        // Setting icons for actions:
         const QIcon XYPlot_icon=QIcon(":/icons/graph.svg");
         XYPlot->setIcon(XYPlot_icon);
+        Histogram->setIcon(XYPlot_icon);
 
 
 
        // connecting actions to responses via signal-slot mechanism:
         connect(XYPlot,SIGNAL(triggered()),this,SLOT(DataSetToBePlotted()));
+        connect(Histogram,SIGNAL(triggered()),this,SLOT(DataSetHistogram()));
 
 }
 
@@ -65,6 +67,7 @@ DataSetWindow::~DataSetWindow()
     delete PlotSubMenu;
     delete ContextMenu;
     delete XYPlot;
+    delete Histogram;
     delete DisplayedDataSet;
     delete ui;
 }
@@ -77,6 +80,7 @@ void DataSetWindow::contextMenuEvent(QContextMenuEvent *event)
 void DataSetWindow::ConstructContextMenu(QMenu *)
 {// This function is called in the constructor to build the context menu so that it does not need to be built everytime from scratch
     PlotSubMenu->addAction(XYPlot); // Add the action to the menu
+    PlotSubMenu->addAction(Histogram); // Add the action to the menu
     ContextMenu->addMenu(PlotSubMenu); // Add the submenus to the main menu
 }
 
@@ -86,4 +90,8 @@ void DataSetWindow::DataSetToBePlotted()
  // from the context Menu of the DatSetWidnow
 
    emit Plot_XYPlot_SIGNAL(DisplayedDataSet);
+}
+
+void DataSetWindow::DataSetHistogram() {
+    emit Plot_Histogram_SIGNAL(DisplayedDataSet);
 }
