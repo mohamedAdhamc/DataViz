@@ -183,6 +183,18 @@ void GraphWindow::SetGraphSetting(DataSet *DataSet)
     ui->customPlot->graph()->rescaleAxes();
 }
 
+void GraphWindow::SetGraphVectorSetting(std::vector<DataSet *>DataSet)
+{ // Draw multiple datasets on the same graph
+    std::vector<QPen> colours = {QPen(Qt::blue),QPen(Qt::red),QPen(Qt::yellow),QPen(Qt::black),QPen(Qt::green),QPen(Qt::magenta),QPen(Qt::cyan)};
+    for (unsigned long i=0; i<DataSet.size(); i++) {
+        ui->customPlot->addGraph();
+        ui->customPlot->graph()->addData(DataSet[i]);
+        ui->customPlot->graph()->setPen(colours[i%colours.size()]);
+        ui->customPlot->graph()->setName(DataSet[i]->getName());
+        ui->customPlot->graph()->rescaleAxes();
+    }
+}
+
 void GraphWindow::contextMenuEvent(QContextMenuEvent *event)
 {
 	std::cout<<__PRETTY_FUNCTION__<<std::endl;
@@ -215,18 +227,6 @@ void GraphWindow::ConstructContextMenu(QMenu *)
 	Graph1SubMenu->addMenu(styleGrpah1);
 	Graph1SubMenu->addMenu(widthGrpah1);
 	ContextMenu->addMenu(Graph1SubMenu); // Add the submenus to the main menu
-}
-
-
-void GraphWindow::SetGraphVectorSetting(std::vector<DataSet *>DataSet)
-{ // Sets up the curve and plots it
-    for (auto data : DataSet) {
-        ui->customPlot->addGraph();
-        ui->customPlot->graph()->addData(data);
-        ui->customPlot->graph()->setPen(QPen(Qt::blue));
-        ui->customPlot->graph()->setName(data->getName());
-        ui->customPlot->graph()->rescaleAxes();
-    }
 }
 
 void GraphWindow::SetFigureSetting()
