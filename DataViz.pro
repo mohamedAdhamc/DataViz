@@ -10,7 +10,6 @@ CONFIG += c++11 # Setting the standard of C++
 
 SOURCES += \
     aboutdialog.cpp \
-    customitemmodel.cpp \
     dataset.cpp \
     datasetsviewer.cpp \
     datasetwindow.cpp \
@@ -24,7 +23,6 @@ SOURCES += \
 HEADERS += \
     aboutdialog.h \
     atmsp.h \
-    customitemmodel.h \
     dataset.h \
     datasetsviewer.h \
     datasetwindow.h \
