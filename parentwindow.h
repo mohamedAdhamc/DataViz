@@ -47,6 +47,7 @@ private slots:
     void on_actionLoad_Dataset_triggered();
 	void on_actionShow_DataSets_triggered();
     void GraphWindowToBePlotted(DataSet *ptr); // A slot to plot a new graph window
+	void GraphWindowToBePlotted(std::vector<DataSet *>DataSet); // A slot to plot a new graph window
     void HistogramWindowToBePlotted(DataSet *ptr); // A slot to plot a new graph window
 
     void on_actionAbout_triggered();
@@ -59,12 +60,5 @@ private:
     QMdiSubWindow* subWindow=nullptr; // Temporary variable for subwindows (whether datasetwindow or graphwindow)
     DataSet *AddedDataSet=nullptr; // Temporary variable for dataset (usally has the latest added dataset)
     DataSetWindow *AddedDataSetWindow=nullptr;// Temporary variable for datasetwindow (usually has the latest created datasetwidnow)
-
-
-
-
-
-
-
 };
 #endif // PARENTWINDOW_H

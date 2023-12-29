@@ -67,13 +67,21 @@ void ParentWindow::on_actionShow_DataSets_triggered()
 	DatasetsViewer* ds=new DatasetsViewer(this);
 	subWindow=ui->WindowsManager->addSubWindow(ds);
 	ds->show(); // showing the new dataset window to the user (when it is added for the first time)
+	connect(ds,SIGNAL(Plot_XYPlot_SIGNAL_Multiple(std::vector<DataSet*>)),this,SLOT(GraphWindowToBePlotted(std::vector<DataSet*>)));
 }
 
 void ParentWindow::GraphWindowToBePlotted(DataSet *ptr)
 { // This function is a slot that is called when the parentwindow is to plot a dataset in from a datasetwindow
-    GraphWindow *AddedGraphWindow=new GraphWindow(ptr,this);
+	GraphWindow *AddedGraphWindow=new GraphWindow(ptr,this);
     subWindow=ui->WindowsManager->addSubWindow(AddedGraphWindow);
-    AddedGraphWindow->show();
+	AddedGraphWindow->show();
+}
+
+void ParentWindow::GraphWindowToBePlotted(std::vector<DataSet *> DataSet)
+{
+	GraphWindow *AddedGraphWindow=new GraphWindow(DataSet,this);
+	subWindow=ui->WindowsManager->addSubWindow(AddedGraphWindow);
+	AddedGraphWindow->show();
 }
 
 void ParentWindow::HistogramWindowToBePlotted(DataSet *ptr)

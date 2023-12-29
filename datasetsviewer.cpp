@@ -1,7 +1,9 @@
 #include "datasetsviewer.h"
-#include <QTableView>
 #include <QVBoxLayout>
-#include <dataset.h>
+#include <iostream>
+#include <QContextMenuEvent>
+#include <parentwindow.h>
+#include <vector>
 
 QStandardItemModel* DatasetsViewer::model = new QStandardItemModel();
 
@@ -13,11 +15,12 @@ DatasetsViewer::DatasetsViewer(QWidget *parent)
 	QVBoxLayout* mainVBox = new QVBoxLayout(this);
 
 	// Create a model for the list view
-//	QStandardItemModel *model = new QStandardItemModel(this);
+	//QStandardItemModel *model = new QStandardItemModel(this);
 
 	// Set headers for the columns
 	model->setHorizontalHeaderLabels({"Dataset Name", "Comment"});
 
+	//add any new model data
 	for (int i=0; i<DataSet::datasets.size(); i++) {
 		if ((i+1) <= model->rowCount())
 			continue;
@@ -35,16 +38,43 @@ DatasetsViewer::DatasetsViewer(QWidget *parent)
 	}
 
 	// Create the table view
-	QTableView *tableView = new QTableView;
+	tableView = new QTableView;
 	tableView->setModel(model);
 	tableView->setSelectionBehavior(QAbstractItemView::SelectRows);
 	tableView->setSelectionMode(QAbstractItemView::MultiSelection);
 
 	mainVBox->addWidget(tableView);
 	setLayout(mainVBox);
+
+
+	//create menu
+	ContextMenu->addAction(plotSelectedAction);
+	//connect plotSelectedAction
+	connect(plotSelectedAction,SIGNAL(triggered()),this,SLOT(DataSetToBePlotted()));
+
 }
 
 DatasetsViewer::~DatasetsViewer()
 {
 	//save the items in static var for later reuse
+}
+
+void DatasetsViewer::contextMenuEvent(QContextMenuEvent *event)
+{
+	ContextMenu->popup(event->globalPos()); // displaying the menu where the user clicks
+}
+
+void DatasetsViewer::DataSetToBePlotted()
+{
+	//get selected datasets
+	QModelIndexList selectedIndexes = tableView->selectionModel()->selectedRows();
+	QList<int> selectedRows;
+	for (const QModelIndex &index : selectedIndexes) {
+		selectedRows.append(index.row());
+	}
+	//now that we know selected rows construct the dataset vector
+	std::vector<DataSet*> ds;
+	for (int i: selectedRows)
+		ds.push_back(DataSet::datasets[i]);
+	emit Plot_XYPlot_SIGNAL_Multiple(ds);
 }
