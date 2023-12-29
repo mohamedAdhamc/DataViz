@@ -105,3 +105,10 @@ void ParentWindow::on_actionHelp_triggered()
 	Help_dlg->show();
 }
 
+void ParentWindow::on_actionFunction_triggered()
+{// This function is called when the user clicks on "Function" option under "Analysis" menu
+    FunctionDialog* Function_dlg=new FunctionDialog(this);
+    Function_dlg->exec();
+    delete Function_dlg;
+}
+
