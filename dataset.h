@@ -6,6 +6,7 @@
 #include <QTextStream>
 #include <QMessageBox>
 #include "gsl/gsl_matrix.h"
+#include <vector>
 
 /********************************
  *
@@ -36,6 +37,8 @@ public:
     double* getPoint(int i); // Function to return the ith datapoint
 
     bool IsDataSetValid=true; // Used to detect and handle error subsquently
+
+	static std::vector<DataSet*> datasets;
 };
 
 #endif // DATASET_H

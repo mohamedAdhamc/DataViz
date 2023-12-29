@@ -39,6 +39,7 @@
      <string>File</string>
     </property>
     <addaction name="actionLoad_Dataset"/>
+    <addaction name="actionShow_DataSets"/>
    </widget>
    <widget class="QMenu" name="menuPlot">
     <property name="title">
@@ -106,6 +107,11 @@
    </property>
    <property name="text">
     <string>Help</string>
+   </property>
+  </action>
+  <action name="actionShow_DataSets">
+   <property name="text">
+    <string>Show DataSets</string>
    </property>
   </action>
  </widget>

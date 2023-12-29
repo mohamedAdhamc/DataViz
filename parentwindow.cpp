@@ -1,14 +1,16 @@
 #include "parentwindow.h"
 #include "ui_parentwindow.h"
+#include <customitemmodel.h>
+#include <iostream>
+#include <datasetsviewer.h>
 
 ParentWindow::ParentWindow(QWidget *parent)
-    : QMainWindow(parent)
-    , ui(new Ui::ParentWindow)
-{ // This block is called when the app is started
-    ui->setupUi(this);
+	: QMainWindow(parent)
+	, ui(new Ui::ParentWindow)
+{
+	ui->setupUi(this);
 
-    setCentralWidget(ui->WindowsManager); // Setting the Main widget of the application
-
+	setCentralWidget(ui->WindowsManager);
 }
 
 ParentWindow::~ParentWindow()
@@ -53,6 +55,18 @@ void ParentWindow::on_actionLoad_Dataset_triggered()
     connect(AddedDataSetWindow,SIGNAL(Plot_Histogram_SIGNAL(DataSet*)),this,SLOT(HistogramWindowToBePlotted(DataSet*)));
     }
 
+
+	//add the dataset to the toolbar
+
+}
+
+void ParentWindow::on_actionShow_DataSets_triggered()
+{
+	std::cout<<"testyoooo"<<Qt::endl;
+	// Creat a subWindow :
+	DatasetsViewer* ds=new DatasetsViewer(this);
+	subWindow=ui->WindowsManager->addSubWindow(ds);
+	ds->show(); // showing the new dataset window to the user (when it is added for the first time)
 }
 
 void ParentWindow::GraphWindowToBePlotted(DataSet *ptr)
@@ -81,7 +95,6 @@ void ParentWindow::on_actionAbout_triggered()
 void ParentWindow::on_actionHelp_triggered()
 {// This function is called when the user clicks on "Help" option under "Help" menu
     HelpDialog* Help_dlg=new HelpDialog(this);
-    Help_dlg->exec();
-    delete Help_dlg;
+	Help_dlg->show();
 }
 

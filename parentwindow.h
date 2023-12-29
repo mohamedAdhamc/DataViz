@@ -45,6 +45,7 @@ public:
 
 private slots:
     void on_actionLoad_Dataset_triggered();
+	void on_actionShow_DataSets_triggered();
     void GraphWindowToBePlotted(DataSet *ptr); // A slot to plot a new graph window
     void HistogramWindowToBePlotted(DataSet *ptr); // A slot to plot a new graph window
 

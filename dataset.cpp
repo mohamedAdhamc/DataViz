@@ -2,7 +2,8 @@
 
 // Initialising the static variable
 int DataSet::DataSetCounter=0;
-
+// Initialize the static member variable
+std::vector<DataSet*> DataSet::datasets;
 
 DataSet::DataSet(QString& FileName)
 {
@@ -73,9 +74,6 @@ DataSet::DataSet(QString& FileName)
                   }
 
               }
-
-
-
     }
 
 
@@ -84,6 +82,7 @@ DataSet::DataSet(QString& FileName)
     // Giving a deafult name to the dataset (D1 for first dataset, D2 for second dataset, etc):
      DataSetCounter++;
      DataSetName="D"+QString::number(DataSetCounter);
+	 datasets.push_back(this);
     }
 
 }
