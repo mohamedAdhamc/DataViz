@@ -9,6 +9,7 @@ ParentWindow::ParentWindow(QWidget *parent)
 {
 	ui->setupUi(this);
     Function_dlg=new FunctionDialog(this);
+    connect(Function_dlg,SIGNAL(Plot_Function_SIGNAL(DataSet*)),this,SLOT(GraphWindowToBePlotted(DataSet*)));
 
 	setCentralWidget(ui->WindowsManager);
 }
@@ -52,7 +53,6 @@ void ParentWindow::on_actionLoad_Dataset_triggered()
     // To enable the ParentWindow to plot the dataset when the user clicks on XYPlot option in the context menu
     // of an already displayed DataSetWidnow
     connect(AddedDataSetWindow,SIGNAL(Plot_XYPlot_SIGNAL(DataSet*)),this,SLOT(GraphWindowToBePlotted(DataSet*)));
-    connect(Function_dlg,SIGNAL(Plot_Function_SIGNAL(DataSet*)),this,SLOT(GraphWindowToBePlotted(DataSet*)));
     connect(AddedDataSetWindow,SIGNAL(Plot_Histogram_SIGNAL(DataSet*)),this,SLOT(HistogramWindowToBePlotted(DataSet*)));
     }
 
