@@ -24,6 +24,12 @@ private:
     void on_okButtonClicked(QString function);
     DataSet *ds = nullptr;
 
+signals:
+    void Plot_Function_SIGNAL(DataSet *ptr);
+
+public slots:
+    void FunctionToBePlotted();
+
 private slots:
     void on_okButtonClicked();
 };

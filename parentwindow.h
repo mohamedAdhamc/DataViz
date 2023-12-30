@@ -61,5 +61,6 @@ private:
     QMdiSubWindow* subWindow=nullptr; // Temporary variable for subwindows (whether datasetwindow or graphwindow)
     DataSet *AddedDataSet=nullptr; // Temporary variable for dataset (usally has the latest added dataset)
     DataSetWindow *AddedDataSetWindow=nullptr;// Temporary variable for datasetwindow (usually has the latest created datasetwidnow)
+    FunctionDialog* Function_dlg=nullptr;
 };
 #endif // PARENTWINDOW_H

@@ -10,7 +10,6 @@ FunctionDialog::FunctionDialog(QWidget *parent) :
 
     QString file_name = QString::fromStdString("/home/mahmoud/Work/Freelancing/CPP/Qt/DataViz/sinx.txt");
     ds = new DataSet(file_name);
-
     connect(ui->buttonBox, SIGNAL(accepted()), this, SLOT(on_okButtonClicked()));
 }
 
@@ -21,6 +20,7 @@ FunctionDialog::~FunctionDialog()
 
 void FunctionDialog::on_okButtonClicked() {
     qDebug() << ds->Size();
+    FunctionToBePlotted();
     QString text = ui->textEdit->toPlainText();
     qDebug() << "called";
     qDebug() << text;
@@ -62,4 +62,11 @@ void FunctionDialog::on_okButtonClicked() {
         QString string=QString::fromStdString(ParserObj.errMessage(err));
         qCritical() << string;
     }
+}
+
+void FunctionDialog::FunctionToBePlotted()
+{// A signal to tell the parent widnow that the dataset must be plotted when the user choses XYPlot
+    // from the context Menu of the DatSetWidnow
+
+    emit Plot_Function_SIGNAL(ds);
 }
