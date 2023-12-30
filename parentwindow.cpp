@@ -1,6 +1,5 @@
 #include "parentwindow.h"
 #include "ui_parentwindow.h"
-#include <customitemmodel.h>
 #include <iostream>
 #include <datasetsviewer.h>
 
