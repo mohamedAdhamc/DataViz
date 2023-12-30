@@ -32,6 +32,7 @@ private:
 
 public:
     DataSet(QString& FileName);
+    DataSet(QVector<double> x, QVector<double> y);
     int Size(); // function to get the size of the dataset (currenlty the number of rows only)
     QString getName(); // Function to get the name of the dataset
     double* getPoint(int i); // Function to return the ith datapoint

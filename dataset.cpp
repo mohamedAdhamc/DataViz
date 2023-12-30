@@ -87,6 +87,22 @@ DataSet::DataSet(QString& FileName)
 
 }
 
+DataSet::DataSet(QVector<double> x, QVector<double> y) {
+    NumberOfRows = x.size();
+    Matrix=gsl_matrix_alloc(NumberOfRows,2);
+    for (int i=0;i<NumberOfRows;i++) {
+        gsl_matrix_set(Matrix,i,0, x[i]);
+        gsl_matrix_set(Matrix,i,1, y[i]);
+    }
+    if (IsDataSetValid) // Only increment the number of datsets if loading is succesfull
+    {
+        // Giving a deafult name to the dataset (D1 for first dataset, D2 for second dataset, etc):
+        DataSetCounter++;
+        DataSetName="D"+QString::number(DataSetCounter);
+        datasets.push_back(this);
+    }
+}
+
 int DataSet::Size()
 { // Function to return the size of the dataset (number of rows)
     return NumberOfRows;
