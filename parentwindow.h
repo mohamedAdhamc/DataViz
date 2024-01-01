@@ -28,6 +28,7 @@
 #include "histogramwindow.h"
 #include "aboutdialog.h"
 #include "helpdialog.h"
+#include "functiondialog.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -51,7 +52,7 @@ private slots:
     void HistogramWindowToBePlotted(DataSet *ptr); // A slot to plot a new graph window
 
     void on_actionAbout_triggered();
-
+    void on_actionFunction_triggered();
     void on_actionHelp_triggered();
 
 private:
@@ -60,5 +61,6 @@ private:
     QMdiSubWindow* subWindow=nullptr; // Temporary variable for subwindows (whether datasetwindow or graphwindow)
     DataSet *AddedDataSet=nullptr; // Temporary variable for dataset (usally has the latest added dataset)
     DataSetWindow *AddedDataSetWindow=nullptr;// Temporary variable for datasetwindow (usually has the latest created datasetwidnow)
+    FunctionDialog* Function_dlg=nullptr;
 };
 #endif // PARENTWINDOW_H

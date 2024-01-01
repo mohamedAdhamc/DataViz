@@ -8,6 +8,8 @@ ParentWindow::ParentWindow(QWidget *parent)
 	, ui(new Ui::ParentWindow)
 {
 	ui->setupUi(this);
+    Function_dlg=new FunctionDialog(this, &AllDataSets);
+    connect(Function_dlg,SIGNAL(Plot_Function_SIGNAL(DataSet*)),this,SLOT(GraphWindowToBePlotted(DataSet*)));
 
 	setCentralWidget(ui->WindowsManager);
 }
@@ -103,5 +105,10 @@ void ParentWindow::on_actionHelp_triggered()
 {// This function is called when the user clicks on "Help" option under "Help" menu
     HelpDialog* Help_dlg=new HelpDialog(this);
 	Help_dlg->show();
+}
+
+void ParentWindow::on_actionFunction_triggered()
+{// This function is called when the user clicks on "Function" option under "Analysis" menu
+    Function_dlg->exec();
 }
 
