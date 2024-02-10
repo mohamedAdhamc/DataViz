@@ -13,6 +13,7 @@ SOURCES += \
     dataset.cpp \
     datasetsviewer.cpp \
     datasetwindow.cpp \
+    drawgraph.cpp \
     functiondialog.cpp \
     graphwindow.cpp \
     helpdialog.cpp \
@@ -27,6 +28,7 @@ HEADERS += \
     dataset.h \
     datasetsviewer.h \
     datasetwindow.h \
+    drawgraph.h \
     functiondialog.h \
     graphwindow.h \
     helpdialog.h \
@@ -37,6 +39,7 @@ HEADERS += \
 FORMS += \
     aboutdialog.ui \
     datasetwindow.ui \
+    drawgraph.ui \
     functiondialog.ui \
     graphwindow.ui \
     helpdialog.ui \

@@ -2,6 +2,17 @@
 #include "ui_parentwindow.h"
 #include <iostream>
 #include <datasetsviewer.h>
+#include <drawgraph.h>
+
+//static member init
+DataSet* ParentWindow::AddedDataSet=nullptr; // Temporary variable for dataset (usally has the latest added dataset)
+DataSetWindow* ParentWindow::AddedDataSetWindow=nullptr;// Temporary variable for datasetwindow (usually has the latest created datasetwidnow)
+QMdiSubWindow* ParentWindow::subWindow=nullptr;
+QList<DataSet*> ParentWindow::AllDataSets;
+QMdiArea* ParentWindow::WindowsManager = nullptr;
+ParentWindow* ParentWindow::parentWindow = nullptr;
+
+//class methods
 
 ParentWindow::ParentWindow(QWidget *parent)
 	: QMainWindow(parent)
@@ -9,9 +20,13 @@ ParentWindow::ParentWindow(QWidget *parent)
 {
 	ui->setupUi(this);
     Function_dlg=new FunctionDialog(this, &AllDataSets);
-    connect(Function_dlg,SIGNAL(Plot_Function_SIGNAL(DataSet*)),this,SLOT(GraphWindowToBePlotted(DataSet*)));
+	connect(Function_dlg,SIGNAL(Plot_Function_SIGNAL(DataSet*)),this,SLOT(GraphWindowToBePlotted(DataSet*)));
 
 	setCentralWidget(ui->WindowsManager);
+
+	WindowsManager = ui->WindowsManager;
+
+	parentWindow = this;
 }
 
 ParentWindow::~ParentWindow()
@@ -69,6 +84,14 @@ void ParentWindow::on_actionShow_DataSets_triggered()
 	subWindow=ui->WindowsManager->addSubWindow(ds);
 	ds->show(); // showing the new dataset window to the user (when it is added for the first time)
 	connect(ds,SIGNAL(Plot_XYPlot_SIGNAL_Multiple(std::vector<DataSet*>)),this,SLOT(GraphWindowToBePlotted(std::vector<DataSet*>)));
+}
+
+void ParentWindow::on_actionDraw_Dataset_triggered()
+{
+	//make a new draw graph plot
+	DrawGraph* addedDrawGraph = new DrawGraph(this);
+	subWindow=ui->WindowsManager->addSubWindow(addedDrawGraph);
+	addedDrawGraph->show();
 }
 
 void ParentWindow::GraphWindowToBePlotted(DataSet *ptr)

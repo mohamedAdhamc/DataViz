@@ -31,7 +31,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>23</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -40,6 +40,7 @@
     </property>
     <addaction name="actionLoad_Dataset"/>
     <addaction name="actionShow_DataSets"/>
+    <addaction name="actionDraw_Dataset"/>
    </widget>
    <widget class="QMenu" name="menuPlot">
     <property name="title">
@@ -112,12 +113,17 @@
   </action>
   <action name="actionShow_DataSets">
    <property name="text">
-    <string>Show DataSets</string>
+    <string>Show Datasets</string>
    </property>
   </action>
   <action name="actionFunction">
    <property name="text">
     <string>Function</string>
+   </property>
+  </action>
+  <action name="actionDraw_Dataset">
+   <property name="text">
+    <string>Draw Dataset</string>
    </property>
   </action>
  </widget>
